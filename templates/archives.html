@@ -52,7 +52,12 @@ Full archives of {{ SITENAME|striptags|e }} blog.
             {% else %}
             <article>
             {% endif %}
-            <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }} {%if article.subtitle %} <small> {{ article.subtitle }} </small> {% endif %} </a>
+            {% if article.metadata.small and article.metadata.medium %} 
+                <a class="fancybox" rel="fancybox" href="/{{ article.metadata.medium }}" title="{{ article.title }}">
+                    <img src="/{{ article.metadata.small }}" alt="{{ article.title }}" />
+                </a>
+            {% endif %}
+            <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }} {%if article.summarys %} <small> {{ article.summary }} </small> {% endif %} </a>
             <time pubdate="pubdate" datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
             </article>
             {% endfor %}

@@ -33,8 +33,8 @@
         {% endblock meta_tags_in_head %}
         <title>{% block title %}{{ SITENAME|striptags|e }}{% endblock title %}</title>
         {% block head_links %}
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
         {% if 'assets' in PLUGINS %}
         {% include '_includes/minify_css.html' with context %}
         {% else %}
@@ -42,6 +42,7 @@
         <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/tipuesearch/tipuesearch.css" media="screen">
         <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/elegant.css" media="screen">
         <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/custom.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/jquery.fancybox.css" media="screen">
         {% endif %}
         {% endblock head_links %}
         {% include '_includes/favicon_links.html' %}
@@ -51,6 +52,8 @@
         {% include '_includes/analytics.html' %}
     </head>
     <body>
+        
+    <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
         <div id="content-sans-footer">
         <div class="navbar navbar-static-top">
             <div class="navbar-inner">
@@ -94,12 +97,19 @@
         {% include '_includes/footer.html' %}
         {% block script %}
         <script src="http://code.jquery.com/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-        <script>
-            function validateForm(query)
-            {
-                return (query.length > 0);
+        <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="{{ SITEURL }}/theme/js/jquery.fancybox.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".fancybox").fancybox({
+
+        helpers : {
+            title   : {
+                type: 'inside'
             }
+        }
+    });
+            });
         </script>
         {% endblock script %}
         {% include '_includes/stat_counter.html' %}
